@@ -30,8 +30,7 @@ public class UtilizationFactory {
     }
 
     @SneakyThrows
-    public static void refactorGarbage(Garbage[] garbageArray, BufferedWriter journal)
-            throws GarbageNotRefactorableException, IOException {
+    public static void refactorGarbage(Garbage[] garbageArray, BufferedWriter journal) {
         for (Garbage garbage : garbageArray) {
             switch (garbage.getGarbageType()) {
                 case GLASS -> journal.write(JournalRecord.builder()
