@@ -1,5 +1,7 @@
 package com.javaacademy;
 
+import lombok.SneakyThrows;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 
@@ -26,13 +28,23 @@ public class UtilizationFactory {
         return new Cartoon(garbage.getWeight() / 2);
     }
 
+    @SneakyThrows
     public static void refactorGarbage(Garbage[] garbageArray, BufferedWriter journal)
             throws GarbageNotRefactorableException, IOException {
         for (Garbage garbage : garbageArray) {
             switch (garbage.getGarbageType()) {
-                case GLASS -> journal.write(new JournalRecord(UtilizationFactory.refactorGlassGarbage(garbage)).toString());
-                case PAPER -> journal.write(new JournalRecord(UtilizationFactory.refactorPaperGarbage(garbage)).toString());
-                default -> journal.write(new JournalRecord(garbage.getWeight()).toString());
+                case GLASS -> journal.write(JournalRecord.builder()
+                        .bottle(UtilizationFactory.refactorGlassGarbage(garbage))
+                        .build()
+                        .toString());
+                case PAPER -> journal.write(JournalRecord.builder()
+                        .cartoon(UtilizationFactory.refactorPaperGarbage(garbage))
+                        .build()
+                        .toString());
+                default -> journal.write(JournalRecord.builder()
+                        .garbageWeight(garbage.getWeight())
+                        .build()
+                        .toString());
             }
         }
     }
