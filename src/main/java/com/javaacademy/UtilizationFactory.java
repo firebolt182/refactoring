@@ -1,5 +1,6 @@
 package com.javaacademy;
 
+import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 
 import java.io.BufferedWriter;
@@ -8,22 +9,27 @@ import java.io.IOException;
 /**
  * Фабрика по переработке мусора
  */
+
+@NoArgsConstructor
 public class UtilizationFactory {
     public static final double BOTTLE_SIZE = 500;
 
-    private UtilizationFactory() {
-    }
-
     private static Bottle refactorGlassGarbage(Garbage garbage) throws GarbageNotRefactorableException {
         if (garbage.getGarbageType() != GarbageType.GLASS) {
-            throw new GarbageNotRefactorableException("Мусор не состоит полностью из стекла!");
+            throw GarbageNotRefactorableException
+                    .garbageNotRefactorableExceptionBuilder()
+                    .message("Мусор не состоит полностью из стекла!")
+                    .build();
         }
         return new Bottle(BOTTLE_SIZE, garbage.getCityFrom());
     }
 
     private static Cartoon refactorPaperGarbage(Garbage garbage) throws GarbageNotRefactorableException {
         if (garbage.getGarbageType() != GarbageType.PAPER) {
-            throw new GarbageNotRefactorableException("Мусор не состоит полностью из бумаги!");
+            throw GarbageNotRefactorableException
+                    .garbageNotRefactorableExceptionBuilder()
+                    .message("Мусор не состоит полностью из бумаги!")
+                    .build();
         }
         return new Cartoon(garbage.getWeight() / 2);
     }
