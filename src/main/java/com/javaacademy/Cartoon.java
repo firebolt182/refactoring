@@ -1,27 +1,16 @@
 package com.javaacademy;
 
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
 /**
  * Картон
  */
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Cartoon {
-    public double weight;
-
-    public Cartoon(double weight) {
-        this.weight = weight;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    @Override
-    public String toString() {
-        return "Cartoon{" +
-                "weight=" + weight +
-                '}';
-    }
+    double weight;
 }
