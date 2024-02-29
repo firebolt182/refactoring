@@ -15,6 +15,7 @@ public class Bottle {
     final double volume;
     @Setter
     double nestedVolume;
+    @ToString.Exclude
     final String cityProducer;
 
     public void addLiquid(double liquidVolume) {
